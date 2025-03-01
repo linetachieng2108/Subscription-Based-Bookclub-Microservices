@@ -28,22 +28,28 @@ public class UserController {
 
     // Get user by ID
     @GetMapping("/{user_id}")
-    public ResponseEntity<User> getUserById(@PathVariable Long userId) {
-        return userService.getUserById(userId)
+    public ResponseEntity<User> getUserById(@PathVariable Long user_id) {
+        return userService.getUserById(user_id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     // Update user
     @PutMapping("/{user_id}")
-    public User updateUser(@PathVariable Long userId, @RequestBody User userDetails) {
-        return userService.updateUser(userId, userDetails);
+    public User updateUser(@PathVariable Long user_id, @RequestBody User userDetails) {
+        return userService.updateUser(user_id, userDetails);
     }
 
     // Delete user
     @DeleteMapping("/{user_id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable Long userId) {
-        userService.deleteUser(userId);
+    public ResponseEntity<Void> deleteUser(@PathVariable Long user_id) {
+        userService.deleteUser(user_id);
         return ResponseEntity.noContent().build();
+    }
+// EXPOSED ENDPOINT TO ADD USER TO A BOOKCLUB
+//    use port ya bookclub microservice
+    @GetMapping("/exists/{user_id}")
+    public ResponseEntity<Boolean> checkUserExists(@PathVariable Long user_id) {
+        return ResponseEntity.ok(userService.getUserById(user_id).isPresent());
     }
 }
