@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
@@ -26,13 +27,20 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    // Get user by ID
+//     Get user by ID
     @GetMapping("/{user_id}")
     public ResponseEntity<User> getUserById(@PathVariable Long user_id) {
         return userService.getUserById(user_id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+
+////    Get user by ID LOGGING
+//    @GetMapping("/{userId}")
+//    public ResponseEntity<User> getUserById(@PathVariable Long userId) {
+//        Optional<User> user = Optional.ofNullable(userService.getUserById(userId));
+//        return user.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+//    }
 
     // Update user
     @PutMapping("/{user_id}")
@@ -47,7 +55,7 @@ public class UserController {
         return ResponseEntity.noContent().build();
     }
 // EXPOSED ENDPOINT TO ADD USER TO A BOOKCLUB
-//    use port ya bookclub microservice
+
     @GetMapping("/exists/{user_id}")
     public ResponseEntity<Boolean> checkUserExists(@PathVariable Long user_id) {
         return ResponseEntity.ok(userService.getUserById(user_id).isPresent());

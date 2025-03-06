@@ -1,7 +1,10 @@
 package com.example.usermicroservice.service;
 
+import com.example.usermicroservice.UserNotFoundException;
 import com.example.usermicroservice.entity.User;
 import com.example.usermicroservice.repository.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +13,8 @@ import java.util.Optional;
 
 @Service
 public class UserService {
+//    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
+
     @Autowired
     private UserRepository userRepository;
 
@@ -23,9 +28,28 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    // Get user by ID
+////     Get user by ID Error handling
+//    public Optional<User> getUserById(Long userId) {
+////        return Optional.ofNullable(userRepository.findById(userId)
+////                .orElseThrow(() -> new UserNotFoundException("User not found with ID: " + userId)));
+//        return userRepository.findById(userId);
+//    }
+//Get user by ID LOGGING
+//    public User getUserById(Long userId) {
+//        logger.info("Fetching user with ID: {}", userId);
+//        Optional<User> user = userRepository.findById(userId);
+//        if (user.isPresent()) {
+//            logger.debug("User found: {}", user.get());
+//            return user.get();
+//        } else {
+//            logger.error("User not found with ID: {}", userId);
+//            throw new UserNotFoundException("User not found with ID: " + userId);
+//        }
+//
+//    }
+
     public Optional<User> getUserById(Long userId) {
-        return userRepository.findById(userId);
+        return userRepository.findById(userId); // Returns Optional<User>
     }
 
     // Update user
