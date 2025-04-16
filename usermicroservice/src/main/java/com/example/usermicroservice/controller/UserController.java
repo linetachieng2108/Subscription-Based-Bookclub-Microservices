@@ -16,9 +16,17 @@ public class UserController {
     private UserService userService;
 
     // Create a new user
+//    @PostMapping
+//    public User createUser(@RequestBody User user) {
+//        return userService.createUser(user);
+//    }
+
+//    CREATE A NEW USER AND PUBLISH DETAILS TO RABBITMQ
+
     @PostMapping
-    public User createUser(@RequestBody User user) {
-        return userService.createUser(user);
+    public String createUser(@RequestBody User user){
+        userService.createUser(user);
+        return "User details sent to RabbitMQ";
     }
 
     // Get all users

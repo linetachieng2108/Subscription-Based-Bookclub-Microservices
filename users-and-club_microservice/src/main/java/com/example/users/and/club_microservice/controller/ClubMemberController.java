@@ -12,24 +12,6 @@ public class ClubMemberController {
     private ClubMemberService clubMemberService;
 
 
-
-
-//    @GetMapping
-//    public List<ClubMember> getAllMembers() {
-//        return clubMemberService.getAllMembers();
-//    }
-//
-//    @GetMapping("/club/{clubId}")
-//    public List<ClubMember> getMembersByClub(@PathVariable Long clubId) {
-//        return clubMemberService.getMembersByClub(clubId);
-//    }
-//
-//    @GetMapping("/{id}")
-//    public ResponseEntity<ClubMember> getMemberById(@PathVariable Long id) {
-//        Optional<ClubMember> member = clubMemberService.getMemberById(id);
-//        return member.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-//    }
-
     @PostMapping("/add")
     public ResponseEntity<String> addMember(@RequestParam Long userId, @RequestParam Long clubId) {
 //        try {
@@ -41,11 +23,6 @@ public class ClubMemberController {
         clubMemberService.addMember(userId, clubId);
         return ResponseEntity.ok("User added to club successfully");
     }
-
-//    @PostMapping
-//    public ClubMember addMember(@RequestParam Long clubId, @RequestParam Long user_id) {
-//        return clubMemberService.addMember(clubId, user_id);
-//    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> removeMember(@PathVariable Long id) {

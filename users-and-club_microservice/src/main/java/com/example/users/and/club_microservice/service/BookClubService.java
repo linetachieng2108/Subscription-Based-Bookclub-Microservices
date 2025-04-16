@@ -1,5 +1,6 @@
 package com.example.users.and.club_microservice.service;
 
+import com.example.users.and.club_microservice.BookClubNotFoundException;
 import com.example.users.and.club_microservice.entity.BookClub;
 import com.example.users.and.club_microservice.repository.BookClubRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,9 @@ public class BookClubService {
     }
 
     public Optional<BookClub> getClubById(Long clubId) {
-        return bookClubRepository.findById(clubId);
+        return Optional.ofNullable(bookClubRepository.findById(clubId)
+                .orElseThrow(() -> new BookClubNotFoundException("BookClub not found with ID: " + clubId)));
+//        return bookClubRepository.findById(clubId);
     }
 
     public BookClub createClub(BookClub bookClub) {

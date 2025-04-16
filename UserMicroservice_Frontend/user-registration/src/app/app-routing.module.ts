@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { UserCreateComponent } from './components/user-create/user-create.component';
 import { UpdateUserComponent } from './components/update-user/update-user.component';
+import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [
   // Route for the user list
@@ -14,6 +15,9 @@ const routes: Routes = [
   },
   {
     path:'update-user/:user_id', component: UpdateUserComponent
+  },
+  {
+    path:'home', component: HomeComponent
   },
   // Default route
   {

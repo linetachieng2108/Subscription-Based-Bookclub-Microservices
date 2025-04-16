@@ -1,4 +1,8 @@
 package com.example.users.and.club_microservice;
 
-public class BookClubNotFoundException {
+public class BookClubNotFoundException extends RuntimeException {
+    public BookClubNotFoundException(String message) {
+        super(message);
+    }
+
 }

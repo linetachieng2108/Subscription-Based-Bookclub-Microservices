@@ -8,6 +8,7 @@ import { UserCreateComponent } from './components/user-create/user-create.compon
 import { UserListComponent } from './components/user-list/user-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UpdateUserComponent } from './components/update-user/update-user.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { UpdateUserComponent } from './components/update-user/update-user.compon
     UserCreateComponent,
     UserListComponent,
     UpdateUserComponent,
+    HomeComponent,
    
   ],
   imports: [

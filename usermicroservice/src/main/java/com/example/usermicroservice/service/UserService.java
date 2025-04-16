@@ -1,10 +1,8 @@
 package com.example.usermicroservice.service;
 
-import com.example.usermicroservice.UserNotFoundException;
+import com.example.usermicroservice.configurations.RabbitMQProducer;
 import com.example.usermicroservice.entity.User;
 import com.example.usermicroservice.repository.UserRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,9 +16,17 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private RabbitMQProducer rabbitMQProducer;
+
     // Create a new user
-    public User createUser(User user) {
-        return userRepository.save(user);
+//    public User createUser(User user) {
+//        return userRepository.save(user);
+//    }
+
+//    Create a new user and publish details to RabbitMQ
+    public void createUser(User user){
+        rabbitMQProducer.sendMessage(user);
     }
 
     // Get all users
